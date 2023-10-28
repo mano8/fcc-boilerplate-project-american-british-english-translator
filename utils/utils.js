@@ -42,7 +42,14 @@ module.exports = class Ut{
      * @returns {string} The object key retrieved from value or undefined if value is not retrived.
      */
     static getDictionaryKeyByValue(object, value){
-        return Object.keys(object).find(key => object[key] === value);
+        return Object.keys(object).find(key => {
+            if(Ut.isObject(value) || Ut.isArray(value)){
+                return JSON.stringify(object[key]) === JSON.stringify(value)
+            }else{
+                return object[key] === value
+            }
+            
+        });
     }
     /**
      * Test if value is a valid array
