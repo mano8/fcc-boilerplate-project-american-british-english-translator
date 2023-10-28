@@ -29,6 +29,29 @@ suite('Utils unit tests', ()=>{
         assert.isFalse(Ut.isObject(['a']), 'An array must return false')
         assert.isFalse(Ut.isObject(2), 'A number must return false')
     })
+
+    test('test getDictionaryKeyByValue method', () => {
+        assert.strictEqual(Ut.getDictionaryKeyByValue({}, 2), undefined, 'An object must return true')
+        assert.strictEqual(Ut.getDictionaryKeyByValue({a: 1, b: 2}, 2), 'b', 'An object must return true')
+        assert.strictEqual(
+            Ut.getDictionaryKeyByValue(
+                {a: ['1', '2', '3'], b: ['4', '5', '6']}, ['4', '5', '6']
+                ), 
+            'b', 
+            'A string must return false')
+        assert.strictEqual(
+            Ut.getDictionaryKeyByValue(
+                {a: {c: 1, d: 2}, b: {e: 1, f: 2}},
+                {e: 1, f: 2}
+            ), 
+            'b', 
+            'An array must return false')
+        assert.strictEqual(
+            Ut.getDictionaryKeyByValue(2, 2), 
+            undefined, 
+            'A number must return false'
+        )
+    })
     
     test('test isArray method', () => {
         assert.isTrue(Ut.isArray([]), 'An empty array must return true')
